@@ -89,6 +89,7 @@ _FAN_MODES = {
     'pwm': _FAN_MODE_PWM,
 }
 
+
 def _prepare_profile(original, critcalTempature):
     clamped = ((temp, clamp(duty, 0, _MAX_FAN_RPM)) for temp, duty in original)
     normal = normalize_profile(clamped, critcalTempature, _MAX_FAN_RPM)

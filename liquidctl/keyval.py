@@ -31,7 +31,7 @@ def get_runtime_dirs(appname='liquidctl'):
     elif sys.platform == 'darwin':
         dirs = [os.path.expanduser(os.path.join('~/Library/Caches', appname))]
     elif sys.platform == 'linux':
-        dirs = [os.path.join('/tmp', appname)]
+        dirs = [os.path.join('/run', appname)]
         # # threat all other platforms as *nix and conform to XDG basedir spec
         # dirs = []
         # if XDG_RUNTIME_DIR:
