@@ -7,7 +7,6 @@ SPDX-License-Identifier: GPL-3.0-or-later
 import logging
 import os
 import sys
-import tempfile
 from ast import literal_eval
 from contextlib import contextmanager
 
@@ -32,17 +31,6 @@ def get_runtime_dirs(appname='liquidctl'):
         dirs = [os.path.expanduser(os.path.join('~/Library/Caches', appname))]
     elif sys.platform == 'linux':
         dirs = [os.path.join('/run', appname)]
-        # # threat all other platforms as *nix and conform to XDG basedir spec
-        # dirs = []
-        # if XDG_RUNTIME_DIR:
-        #     dirs.append(os.path.join(XDG_RUNTIME_DIR, appname))
-        # # regardless whether XDG_RUNTIME_DIR is set, fallback to /var/run if it
-        # # is available; this allows a user with XDG_RUNTIME_DIR set to still
-        # # find data stored by another user as long as it is in the fallback
-        # # path (see #37 for a real world use case)
-        # if os.path.isdir('/run'):
-        #     dirs.append(os.path.join('/run', appname))
-        # assert dirs, 'Could not get a suitable place to store runtime data'
     else:
         dirs = [os.path.join('/tmp', appname)]
     return dirs
@@ -171,7 +159,7 @@ class _FilesystemBackend:
 
             _LOGGER.debug('replaced with %s=%r (stored in %s)', key, new_value, path)
 
-        return (value, new_value)
+        return value, new_value
 
 
 class RuntimeStorage:
