@@ -339,7 +339,7 @@ class _ErrorAcc:
     def log(self, msg, *args, err=None, show_err=False):
         self._errors += 1
         if err:
-            # log the err with traceback before reporting it properly, this time
+            # log err with traceback before reporting it properly, this time
             # without traceback; this puts error messages are at the bottom of the
             # output, where most users first look for them
             _LOGGER.info('detailed error: %s: %r', msg, err, *args, exc_info=True)
